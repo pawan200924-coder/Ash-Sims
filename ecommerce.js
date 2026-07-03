@@ -465,7 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   
-  // RFQ Checkout Form Submission
   const rfqForm = document.getElementById('rfq-checkout-form');
   if (rfqForm) {
     rfqForm.addEventListener('submit', (e) => {
@@ -474,18 +473,44 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = rfqForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending Quote Request...';
+      submitBtn.innerHTML = 'Opening WhatsApp...';
       
-      // Simulate API RFQ dispatch
+      const name = document.getElementById('rfq-name').value;
+      const email = document.getElementById('rfq-email').value;
+      const phone = document.getElementById('rfq-phone').value;
+      const company = document.getElementById('rfq-company').value;
+      const specs = document.getElementById('rfq-specs').value || 'None';
+      const logo = document.getElementById('rfq-logo').value || 'None';
+
+      let itemsText = cart.map(item => {
+        const unitPrice = getUnitPrice(item.basePrice, item.qty);
+        const total = unitPrice * item.qty;
+        return `• ${item.name} (${item.qty} units @ AED ${unitPrice.toFixed(2)}/unit = AED ${total.toFixed(2)})`;
+      }).join('\n');
+
+      let totalEstimate = cart.reduce((sum, item) => sum + (getUnitPrice(item.basePrice, item.qty) * item.qty), 0);
+
+      const rfqMessage = `*New B2B Quote Request - Ash & Sims Website*\n\n` +
+                         `*Company Name:* ${company}\n` +
+                         `*Contact Name:* ${name}\n` +
+                         `*Business Email:* ${email}\n` +
+                         `*Phone Number:* ${phone}\n\n` +
+                         `*Selected Items:*\n${itemsText}\n\n` +
+                         `*Estimated Total:* AED ${totalEstimate.toFixed(2)}\n\n` +
+                         `*Branding Specs:* ${specs}\n` +
+                         `*Logo Reference:* ${logo}`;
+
+      const waUrl = `https://wa.me/971554151136?text=${encodeURIComponent(rfqMessage)}`;
+      
       setTimeout(() => {
-        alert('Your Request for Quote (RFQ) has been sent successfully. Our team will review your quantities and logo engraving specifications and contact you shortly.');
+        window.open(waUrl, '_blank');
         cart = [];
         saveCart();
         closeRFQModal();
         rfqForm.reset();
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
-      }, 1800);
+      }, 800);
     });
   }
 });

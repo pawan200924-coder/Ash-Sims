@@ -57,16 +57,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       const originalText = submitBtn.innerHTML;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending...';
+      submitBtn.innerHTML = 'Opening WhatsApp...';
 
-      // Simulate sending
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const message = document.getElementById('message').value;
+
+      const waMsg = `*New Contact Inquiry - Ash & Sims Website*\n\n` +
+                    `*Name:* ${name}\n` +
+                    `*Email:* ${email}\n` +
+                    `*Phone:* ${phone}\n` +
+                    `*Message:* ${message}`;
+
+      const waUrl = `https://wa.me/971554151136?text=${encodeURIComponent(waMsg)}`;
+
       setTimeout(() => {
-        // Show success alert
-        alert('Thank you for contacting Ash & Sims Advertising LLC. We have received your inquiry and will get back to you shortly.');
+        window.open(waUrl, '_blank');
         contactForm.reset();
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
-      }, 1500);
+      }, 800);
     });
   }
 });
