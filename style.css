@@ -222,7 +222,7 @@ img {
 
 /* Header & Navigation */
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -363,8 +363,8 @@ img {
 
 /* Hero Section */
 .hero {
-  min-height: 95vh;
-  padding-top: calc(var(--header-height) + 80px);
+  min-height: calc(100vh - var(--header-height));
+  padding: 60px 0;
   display: flex;
   align-items: center;
 }
@@ -648,8 +648,7 @@ img {
 
 /* Page Header for Inner Pages */
 .page-header {
-  padding-top: calc(var(--header-height) + 60px);
-  padding-bottom: 60px;
+  padding: 60px 0;
   background-color: var(--color-dark);
   color: #ffffff;
   text-align: center;
