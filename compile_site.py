@@ -245,10 +245,6 @@ def compile_home():
                 </div>
                 <div class="hero-image-wrap">
                     <img class="hero-image" src="{hero_img}" alt="Digital Printing Company in Dubai">
-                    <div class="hero-badge">
-                        <div class="hero-badge-count">15+</div>
-                        <div class="hero-badge-text">Years of<br>Excellence</div>
-                    </div>
                 </div>
             </div>
         </div>

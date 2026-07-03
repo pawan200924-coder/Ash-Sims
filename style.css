@@ -252,6 +252,7 @@ img {
   height: 44px;
   width: auto;
   transition: var(--transition-smooth);
+  mix-blend-mode: multiply;
 }
 
 .header-scrolled .logo img {
@@ -363,7 +364,7 @@ img {
 /* Hero Section */
 .hero {
   min-height: 95vh;
-  padding-top: calc(var(--header-height) + 40px);
+  padding-top: calc(var(--header-height) + 80px);
   display: flex;
   align-items: center;
 }
